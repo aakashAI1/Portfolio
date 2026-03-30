@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink-1: 245 247 255;
+  --ink-2: 198 206 221;
+  --ink-3: 140 154 180;
+  --brand-1: 124 92 255;
+  --brand-2: 0 212 255;
+
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: rgb(11 13 18);
+  color: rgb(var(--ink-2));
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    "Apple Color Emoji",
+    "Segoe UI Emoji";
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+html:not(.dark) {
+  --ink-1: 14 18 28;
+  --ink-2: 46 55 72;
+  --ink-3: 96 110 133;
+  --brand-1: 124 92 255;
+  --brand-2: 0 138 255;
+
+  color-scheme: light;
+}
+
+html:not(.dark) body {
+  background: rgb(248 250 252);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(124, 92, 255, 0.25);
+}
+
