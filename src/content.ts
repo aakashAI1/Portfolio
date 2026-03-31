@@ -1,13 +1,9 @@
-// types
-export type ProjectTag =
-  | 'AI/ML'
-  | 'Data'
-  | 'Delivery'
-  | 'Fairness'
-  | 'Explainability'
-  | 'Automation'
-//git error resolution comment : Roshan
-export type Project = {
+// src/content.ts
+
+export type ProjectTag = 'AI/ML' | 'Data' | 'Delivery'
+
+// Full typing for projects yeahhhhh
+export type FeaturedProject = {
   title: string
   subtitle: string
   problem: string
@@ -21,39 +17,7 @@ export type Project = {
   }
 }
 
-export type Content = {
-  name: string
-  location: string
-  headline: string
-  intro: string
-  links: {
-    email: string
-    phone: string
-    github: string
-    linkedin: string
-    instagram: string
-  }
-  about: {
-    title: string
-    body: string[]
-    focus: string[]
-  }
-  featuredProjects: Project[]
-  skills: {
-    label: string
-    items: string[]
-  }[]
-  experience: {
-    role: string
-    company: string
-    period: string
-    bullets: string[]
-  }[]
-  achievements: string[]
-}
-
-// content
-export const content: Content = {
+export const content = {
   name: 'Aakash Chaudhary',
   location: 'Mumbai, India',
   headline: 'Building fair, explainable AI systems that earn trust.',
@@ -64,8 +28,7 @@ export const content: Content = {
     phone: '+91 8451848007',
     github: 'https://github.com/aakashAI1',
     linkedin: 'https://www.linkedin.com/in/aakash-chaudhary-948217391/',
-    instagram:
-      'https://www.instagram.com/aakash_chyy?igsh=NzkwYzI4d3FqeGt0&utm_source=qr',
+    instagram: 'https://www.instagram.com/aakash_chyy',
   },
   about: {
     title: 'I build AI that is measurable, interpretable, and production-minded.',
@@ -90,9 +53,12 @@ export const content: Content = {
         'Built a human-in-the-loop evaluation workflow with interpretable models (e.g., EBM), dataset augmentation, and fairness/performance metrics.',
       impact:
         'Improved robustness and explainability using GenAI-driven synthetic data and edge-case test generation—making decisions auditable and easier to validate.',
-      stack: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'SQL', 'EBM'],
-      tags: ['AI/ML', 'Fairness', 'Explainability'],
-      links: { demo: '', repo: '' },
+      stack: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'SQL', 'Interpretable ML (EBM)'],
+      tags: ['AI/ML'],
+      links: {
+        demo: '',
+        repo: '',
+      },
     },
     {
       title: 'Client-facing Data Product (PDF → Insights)',
@@ -104,20 +70,21 @@ export const content: Content = {
       impact:
         'Delivered actionable intelligence and client-ready reporting across the full lifecycle: collection → transformation → final deliverables.',
       stack: ['Python', 'Web scraping', 'Data wrangling', 'Analytical reporting'],
-      tags: ['Data', 'Automation', 'Delivery'],
-      links: { demo: '', repo: '' },
+      tags: ['Data', 'Delivery'],
+      links: {
+        demo: '',
+        repo: '',
+      },
     },
-  ],
+  ] as FeaturedProject[],
   skills: [
-    { label: 'Languages', items: ['Python', 'C', 'SQL'] },
+    {
+      label: 'Languages',
+      items: ['Python', 'C', 'SQL'],
+    },
     {
       label: 'AI / Data',
-      items: [
-        'Machine Learning',
-        'Data Science',
-        'Bias & fairness evaluation',
-        'Synthetic data testing',
-      ],
+      items: ['Machine Learning', 'Data Science', 'Bias & fairness evaluation', 'Synthetic data testing'],
     },
     {
       label: 'Tools',
@@ -125,13 +92,7 @@ export const content: Content = {
     },
     {
       label: 'Strengths',
-      items: [
-        'Problem solving',
-        'Critical thinking',
-        'Leadership',
-        'Negotiation',
-        'Communication',
-      ],
+      items: ['Problem solving', 'Critical thinking', 'Leadership', 'Negotiation', 'Communication'],
     },
   ],
   experience: [
@@ -142,7 +103,7 @@ export const content: Content = {
       bullets: [
         'Developed an AI human-in-the-loop framework for fair student loan decision-making with compliance-aware evaluation.',
         'Prepared and augmented datasets; evaluated interpretable pre-trained models (e.g., EBM) using fairness and performance metrics.',
-        'Used GenAI to create synthetic data, generate edge-case tests, and validate model behavior.',
+        'Used GenAI to create synthetic data, generate edge-case tests, and validate model behavior for robustness and explainability.',
       ],
     },
     {
@@ -150,15 +111,10 @@ export const content: Content = {
       company: 'Think Analytics India Pvt. Ltd',
       period: 'Jun 2025 – Jul 2025',
       bullets: [
-        'Built a client-facing data product by extracting structured insights from unstructured PDF data.',
-        'Performed cleaning, preprocessing, and analysis.',
-        'Delivered end-to-end data workflows.',
+        'Built a client-facing data product by extracting structured insights from unstructured PDF data found across the web.',
+        'Performed cleaning, preprocessing, and analysis to transform raw datasets into decision-ready intelligence.',
+        'Contributed end-to-end—from collection and transformation to deliverables presented to clients.',
       ],
     },
   ],
-  achievements: [
-    '3rd place in Bootcamp ’20 and Ideathon ’25.',
-    'International Dance Council (CID), Paris — Hip Hop Level 1.',
-    'Advanced Pranic Healing certification.',
-  ],
-}
+} as const

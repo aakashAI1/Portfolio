@@ -1,14 +1,15 @@
 // src/App.tsx
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { content, FeaturedProject } from './content'
+import { content, FeaturedProject, ProjectTag } from './content'
 import { ProjectCard } from './components/ProjectCard'
 import { Chip } from './components/Chip'
 import { Section } from './components/Section'
 import { Tabs } from './components/Tabs'
 import { ThemeToggle } from './components/ThemeToggle'
+import profile from './assets/profile.png'
 
-type ProjectFilter = 'All' | 'AI/ML' | 'Data' | 'Delivery'
+type ProjectFilter = 'All' | ProjectTag
 
 function scrollToId(id: string) {
   const el = document.getElementById(id)
@@ -18,10 +19,11 @@ function scrollToId(id: string) {
 export default function App() {
   const [filter, setFilter] = useState<ProjectFilter>('All')
 
-  // Filter projects based on selected tab
   const filteredProjects = useMemo(() => {
     if (filter === 'All') return content.featuredProjects
-    return content.featuredProjects.filter((p) => p.tags.includes(filter))
+    return content.featuredProjects.filter((p) =>
+      p.tags.includes(filter as ProjectTag)
+    )
   }, [filter])
 
   return (
@@ -78,15 +80,24 @@ export default function App() {
         
         {/* About Section */}
         <Section id="about" eyebrow="About" title={content.about.title}>
-          <div className="space-y-3">
-            {content.about.body.map((line, idx) => (
-              <p key={idx}>{line}</p>
-            ))}
-          </div>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {content.about.focus.map((item, idx) => (
-              <Chip key={idx}>{item}</Chip>
-            ))}
+          <div className="flex flex-col-reverse items-start gap-6 md:flex-row md:items-center">
+            <div className="space-y-3 flex-1">
+              {content.about.body.map((line, idx) => (
+                <p key={idx}>{line}</p>
+              ))}
+              <div className="mt-4 flex flex-wrap gap-2">
+                {content.about.focus.map((item, idx) => (
+                  <Chip key={idx}>{item}</Chip>
+                ))}
+              </div>
+            </div>
+            <div className="flex-shrink-0">
+              <img
+                src={profile}
+                alt={content.name}
+                className="h-36 w-36 rounded-full border-4 border-white/10 object-cover shadow-lg"
+              />
+            </div>
           </div>
         </Section>
 
@@ -148,7 +159,7 @@ export default function App() {
           </div>
         </Section>
 
-        {/* Contact / Footer Section */}
+        {/* Contact Section */}
         <Section id="contact" eyebrow="Contact" title="Get in touch">
           <p className="text-sm text-ink-3 mb-4">
             Feel free to email me at <a className="text-ink-1 underline" href={`mailto:${content.links.email}`}>{content.links.email}</a> or connect on LinkedIn.

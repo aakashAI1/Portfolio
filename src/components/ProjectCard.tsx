@@ -1,8 +1,13 @@
+// src/components/ProjectCard.tsx
 import { motion } from 'framer-motion'
-import type { FeaturedProject } from '../content'
+import type { FeaturedProject, ProjectTag } from '../content'
 import { Chip } from './Chip'
 
-export function ProjectCard({ project }: { project: FeaturedProject }) {
+interface ProjectCardProps {
+  project: FeaturedProject
+}
+
+export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <motion.article
       whileHover={{ y: -4 }}
@@ -20,7 +25,7 @@ export function ProjectCard({ project }: { project: FeaturedProject }) {
             <p className="mt-1 text-sm text-ink-3">{project.subtitle}</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {project.tags.map((t) => (
+            {project.tags.map((t: ProjectTag) => (
               <Chip key={t}>{t}</Chip>
             ))}
           </div>
@@ -39,7 +44,7 @@ export function ProjectCard({ project }: { project: FeaturedProject }) {
         </div>
 
         <div className="mt-5 flex flex-wrap gap-2">
-          {project.stack.map((s) => (
+          {project.stack.map((s: string) => (
             <Chip key={s} className="bg-white/[0.03]">
               {s}
             </Chip>
@@ -48,7 +53,7 @@ export function ProjectCard({ project }: { project: FeaturedProject }) {
 
         {(project.links.repo || project.links.demo) && (
           <div className="mt-6 flex flex-wrap gap-3">
-            {project.links.repo ? (
+            {project.links.repo && (
               <a
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-ink-1 transition hover:bg-white/10"
                 href={project.links.repo}
@@ -57,8 +62,8 @@ export function ProjectCard({ project }: { project: FeaturedProject }) {
               >
                 Repository
               </a>
-            ) : null}
-            {project.links.demo ? (
+            )}
+            {project.links.demo && (
               <a
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-1 to-brand-2 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
                 href={project.links.demo}
@@ -67,11 +72,10 @@ export function ProjectCard({ project }: { project: FeaturedProject }) {
               >
                 Live demo
               </a>
-            ) : null}
+            )}
           </div>
         )}
       </div>
     </motion.article>
   )
 }
-
