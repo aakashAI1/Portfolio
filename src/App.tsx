@@ -10,7 +10,7 @@ import { ThemeToggle } from './components/ThemeToggle'
 import profile from './assets/profile.png'
 
 type ProjectFilter = 'All' | ProjectTag
-
+// aakash loves adith
 function scrollToId(id: string) {
   const el = document.getElementById(id)
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
