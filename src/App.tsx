@@ -20,10 +20,12 @@ export default function App() {
   const [filter, setFilter] = useState<ProjectFilter>('All')
 
   const filteredProjects = useMemo(() => {
-    if (filter === 'All') return content.featuredProjects
-    const tag = filter === 'AI/ML' ? 'AI/ML' : filter
-    return content.featuredProjects.filter((p) => p.tags.includes(tag))
-  }, [filter])
+  if (filter === 'All') return content.featuredProjects
+
+  return content.featuredProjects.filter((p) =>
+    p.tags.includes(filter)
+  )
+}, [filter])
 
   return (
     <div className="min-h-dvh bg-[radial-gradient(1000px_600px_at_15%_0%,rgba(124,92,255,0.18),transparent_60%),radial-gradient(900px_500px_at_85%_10%,rgba(0,212,255,0.10),transparent_55%),linear-gradient(to_bottom,rgba(255,255,255,0.02),transparent_30%)]">
